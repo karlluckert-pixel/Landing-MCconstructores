@@ -8,7 +8,7 @@ const Projects = () => {
             name: "Conjunto Residencial Canaria 74",
             location: "Zona Norte, Montería",
             type: "Conjunto Residencial",
-            image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            image: "/assets/ImagenesMc/Canaria74.jpeg",
             icon: <Home size={20} />
         },
         {
@@ -16,7 +16,7 @@ const Projects = () => {
             name: "La Castellana",
             location: "Montería",
             type: "Casas",
-            image: "https://images.unsplash.com/photo-1600596542815-37a9a2155ebc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            image: "/assets/ImagenesMc/CassasLaCastellana.jpeg",
             icon: <Home size={20} />
         },
         {
@@ -24,7 +24,7 @@ const Projects = () => {
             name: "Urbanización Monteverde",
             location: "Montería",
             type: "Casas",
-            image: "https://images.unsplash.com/photo-1598228723793-52759bba239c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            image: "/assets/ImagenesMc/UrbMonteverde.jpeg",
             icon: <Home size={20} />
         },
         {
@@ -32,7 +32,7 @@ const Projects = () => {
             name: "Urb. Guadalupe",
             location: "Montería",
             type: "Casas",
-            image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b91d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            image: "/assets/ImagenesMc/UrbGuadalupe.jpeg",
             icon: <Home size={20} />
         },
         {
