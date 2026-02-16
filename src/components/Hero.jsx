@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 
 const Hero = () => {
-    // Using a placeholder that fits the construction theme
-    const heroImage = "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80";
+    // Using the user-provided image
+    const heroImage = "/assets/MonteriaAerero.jpeg";
 
     return (
         <section id="inicio" className="relative h-[90vh] flex items-center overflow-hidden">

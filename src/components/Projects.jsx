@@ -1,7 +1,10 @@
-import { motion } from 'framer-motion';
-import { MapPin, Home, Trees } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MapPin, Home, Trees, X, ExternalLink } from 'lucide-react';
+import { useState } from 'react';
 
 const Projects = () => {
+    const [selectedProject, setSelectedProject] = useState(null);
+
     const projects = [
         {
             id: 1,
@@ -46,7 +49,7 @@ const Projects = () => {
     ];
 
     return (
-        <section id="proyectos" className="py-20 bg-white">
+        <section id="proyectos" className="py-20 bg-white relative">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
                     <h3 className="text-primary font-bold text-lg mb-2 uppercase tracking-wider">Nuestro Portafolio</h3>
@@ -85,9 +88,22 @@ const Projects = () => {
                                     <MapPin size={16} className="mr-1" />
                                     <span className="text-sm">{project.location}</span>
                                 </div>
-                                <button className="text-primary font-bold text-sm uppercase tracking-wider group-hover:underline">
-                                    Ver Detalles
-                                </button>
+
+                                <div className="flex justify-between items-center mt-4">
+                                    <button className="text-primary font-bold text-sm uppercase tracking-wider group-hover:underline">
+                                        Ver Detalles
+                                    </button>
+                                    <button
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            setSelectedProject(project);
+                                        }}
+                                        className="flex items-center gap-1 bg-gray-100 hover:bg-primary hover:text-white text-gray-700 text-xs font-bold px-3 py-2 rounded-full transition-all duration-300"
+                                    >
+                                        <MapPin size={14} />
+                                        Ver Mapa
+                                    </button>
+                                </div>
                             </div>
                         </motion.div>
                     ))}
@@ -102,6 +118,67 @@ const Projects = () => {
                     </a>
                 </div>
             </div>
+
+            {/* Map Modal */}
+            <AnimatePresence>
+                {selectedProject && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+                        onClick={() => setSelectedProject(null)}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl overflow-hidden relative"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <div className="flex justify-between items-center p-4 border-b">
+                                <div>
+                                    <h3 className="text-xl font-bold text-gray-800">{selectedProject.name}</h3>
+                                    <p className="text-sm text-gray-500 flex items-center">
+                                        <MapPin size={14} className="mr-1" />
+                                        {selectedProject.location}
+                                    </p>
+                                </div>
+                                <button
+                                    onClick={() => setSelectedProject(null)}
+                                    className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                                >
+                                    <X size={24} className="text-gray-500" />
+                                </button>
+                            </div>
+
+                            <div className="h-[400px] w-full bg-gray-100 relative">
+                                <iframe
+                                    width="100%"
+                                    height="100%"
+                                    frameBorder="0"
+                                    scrolling="no"
+                                    marginHeight="0"
+                                    marginWidth="0"
+                                    src={`https://maps.google.com/maps?q=${encodeURIComponent(selectedProject.name + " " + selectedProject.location)}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
+                                    className="absolute inset-0"
+                                ></iframe>
+                                <div className="absolute bottom-4 right-4">
+                                    <a
+                                        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selectedProject.name + " " + selectedProject.location)}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="bg-white text-primary px-4 py-2 rounded-lg shadow-lg text-sm font-bold flex items-center gap-2 hover:bg-gray-50 transition-colors"
+                                    >
+                                        <ExternalLink size={16} />
+                                        Abrir en Google Maps
+                                    </a>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     );
 };
